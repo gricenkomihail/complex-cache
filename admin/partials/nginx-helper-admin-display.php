@@ -21,7 +21,7 @@ global $pagenow;
 		<?php esc_html_e( 'Nginx Settings', 'nginx-helper' ); ?>
 	</h2>
 	<div id="poststuff">
-		<div id="post-body" class="metabox-holder columns-2">
+		<div id="post-body" class="metabox-holder columns-1"> <!-- EDITED -->
 			<div id="post-body-content">
 				<?php
 				/* Show settinhs tabs */
@@ -47,16 +47,16 @@ global $pagenow;
 					case 'general':
 						include plugin_dir_path(__FILE__ ) . 'nginx-helper-general-options.php';
 						break;
-					case 'support':
-						include plugin_dir_path(__FILE__ ) . 'nginx-helper-support-options.php';
-						break;
+					/*case 'support':
+						include plugin_dir_path(__FILE__ ) . 'nginx-helper-support-options.php'; //REMOVED
+						break;*/
 
 				}
 				?>
 			</div> <!-- End of #post-body-content -->
 			<div id="postbox-container-1" class="postbox-container">
 				<?php
-					require plugin_dir_path(__FILE__ ) . 'nginx-helper-sidebar-display.php';
+					//require plugin_dir_path(__FILE__ ) . 'nginx-helper-sidebar-display.php'; //REMOVED
 				?>
 			</div> <!-- End of #postbox-container-1 -->
 		</div> <!-- End of #post-body -->

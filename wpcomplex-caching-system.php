@@ -1,17 +1,13 @@
 <?php
 /**
- * Plugin Name:       Nginx Helper
- * Plugin URI:        https://rtcamp.com/nginx-helper/
- * Description:       Cleans nginx's fastcgi/proxy cache or redis-cache whenever a post is edited/published. Also does few more things.
- * Version:           2.0.1
- * Author:            rtCamp
- * Author URI:        https://rtcamp.com
+ * Plugin Name:       WPComplex Caching System
+ * Description:       WPComplex caching system helper plugin.
+ * Version:           2.0.2
  * Text Domain:       nginx-helper
  * Domain Path:       /languages
  * Requires at least: 3.0
- * Tested up to: 4.9.8
+ * Tested up to: 5.1
  *
- * @link              https://rtcamp.com/nginx-helper/
  * @since             2.0.0
  * @package           nginx-helper
  */

@@ -133,6 +133,11 @@ class Nginx_Helper {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-nginx-helper-admin.php';
 
 		/**
+		 * The class for helping updates from own server
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-complex-purger-helper.php'; // ADDED
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -166,7 +171,9 @@ class Nginx_Helper {
 	 */
 	private function define_admin_hooks() {
 
-		global $nginx_helper_admin, $nginx_purger;
+		global $nginx_helper_admin, $nginx_purger, $complex_purger_helper; // ADDED
+
+		$complex_purger_helper = new Complex_Purger_Helper( $this->get_plugin_name(), $this->get_version() ); // ADDED
 
 		$nginx_helper_admin = new Nginx_Helper_Admin( $this->get_plugin_name(), $this->get_version() );
 
@@ -187,8 +194,11 @@ class Nginx_Helper {
 
 		} else {
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fastcgi-purger.php';
-			$nginx_purger = new FastCGI_Purger();
+			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fastcgi-purger.php';
+			//$nginx_purger = new FastCGI_Purger();
+
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-complex-purger.php';
+			$nginx_purger = new Complex_Purger();
 
 		}
 
@@ -221,7 +231,7 @@ class Nginx_Helper {
 		$this->loader->add_action( 'edit_term', $nginx_purger, 'purge_on_term_taxonomy_edited', 20, 3 );
 		$this->loader->add_action( 'delete_term', $nginx_purger, 'purge_on_term_taxonomy_edited', 20, 3 );
 		$this->loader->add_action( 'check_ajax_referer', $nginx_purger, 'purge_on_check_ajax_referer', 20 );
-		$this->loader->add_action( 'admin_init', $nginx_helper_admin, 'purge_all' );
+		$this->loader->add_action( 'admin_bar_init', $nginx_helper_admin, 'purge_all' );
 
 		// expose action to allow other plugins to purge the cache.
 		$this->loader->add_action( 'rt_nginx_helper_purge_all', $nginx_purger, 'purge_all' );
