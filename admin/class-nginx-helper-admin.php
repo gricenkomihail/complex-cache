@@ -201,10 +201,18 @@ class Nginx_Helper_Admin {
 			return;
 		}
 
+		if ( is_admin() ) {
+			$nginx_helper_urls = 'all';
+			$link_title        = __( 'Purge Cache', 'nginx-helper' );
+		} else {
+			$nginx_helper_urls = 'current-url';
+			$link_title        = __( 'Purge Current Page', 'nginx-helper' );
+		}
+
 		$purge_url  = add_query_arg(
 			array(
 				'nginx_helper_action' => 'purge',
-				'nginx_helper_urls'   => 'all',
+				'nginx_helper_urls'   => $nginx_helper_urls,
 			)
 		);
 
@@ -213,9 +221,9 @@ class Nginx_Helper_Admin {
 		$wp_admin_bar->add_menu(
 			array(
 				'id'    => 'nginx-helper-purge-all',
-				'title' => __( 'Purge Cache', 'nginx-helper' ),
+				'title' => $link_title,
 				'href'  => $nonced_url,
-				'meta'  => array( 'title' => __( 'Purge Cache', 'nginx-helper' ) ),
+				'meta'  => array( 'title' => $link_title ),
 			)
 		);
 
@@ -243,7 +251,7 @@ class Nginx_Helper_Admin {
 		return array(
 			'enable_purge'                     => 0,
 			'cache_method'                     => 'enable_fastcgi',
-			'purge_method'                     => 'get_request',
+			'purge_method'                     => 'unlink_files',
 			'enable_map'                       => 0,
 			'enable_log'                       => 0,
 			'log_level'                        => 'INFO',
@@ -253,8 +261,8 @@ class Nginx_Helper_Admin {
 			'purge_homepage_on_del'            => 1,
 			'purge_archive_on_edit'            => 1,
 			'purge_archive_on_del'             => 1,
-			'purge_archive_on_new_comment'     => 0,
-			'purge_archive_on_deleted_comment' => 0,
+			'purge_archive_on_new_comment'     => 1,
+			'purge_archive_on_deleted_comment' => 1,
 			'purge_page_on_mod'                => 1,
 			'purge_page_on_new_comment'        => 1,
 			'purge_page_on_deleted_comment'    => 1,
@@ -491,7 +499,7 @@ class Nginx_Helper_Admin {
 
 				foreach ( $rt_all_blogs as $blog ) {
 
-					if ( 'yes' === SUBDOMAIN_INSTALL ) {
+					if ( true === SUBDOMAIN_INSTALL ) {
 						$rt_nginx_map_array[ $blog->domain ] = $blog->blog_id;
 					} else {
 
@@ -642,12 +650,14 @@ class Nginx_Helper_Admin {
 
 	/**
 	 * Purge all urls.
+	 * Purge current page cache when purging is requested from front
+	 * and all urls when requested from admin dashboard.
 	 *
 	 * @global object $nginx_purger
 	 */
 	public function purge_all() {
 
-		global $nginx_purger;
+		global $nginx_purger, $wp;
 
 		$method = filter_input( INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING );
 
@@ -674,13 +684,26 @@ class Nginx_Helper_Admin {
 		}
 
 		check_admin_referer( 'nginx_helper-purge_all' );
+
+		$current_url = user_trailingslashit( home_url( $wp->request ) );
+
+		if ( ! is_admin() ) {
+			$action       = 'purge_current_page';
+			$redirect_url = $current_url;
+		} else {
+			$redirect_url = add_query_arg( array( 'nginx_helper_action' => 'done' ) );
+		}
+
 		switch ( $action ) {
 			case 'purge':
 				$nginx_purger->purge_all();
 				break;
+			case 'purge_current_page':
+				$nginx_purger->purge_url( $current_url );
+				break;
 		}
 
-		wp_redirect( esc_url_raw( add_query_arg( array( 'nginx_helper_action' => 'done' ) ) ) );
+		wp_redirect( esc_url_raw( $redirect_url ) );
 		exit();
 
 	}
