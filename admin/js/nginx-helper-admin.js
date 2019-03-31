@@ -45,7 +45,7 @@
 
         }
 
-        jQuery( "form#purgeall a" ).click( function (e) {
+        jQuery( "div#purgeall a" ).click( function (e) { //EDITED
 
             if ( confirm( "Purging entire cache is not recommended. Would you like to continue ?" ) == true ) {
                 // continue submitting form
