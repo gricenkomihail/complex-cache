@@ -2,11 +2,11 @@
 /**
  * Plugin Name:       WPComplex Caching System
  * Description:       WPComplex caching system helper plugin.
- * Version:           2.0.3
+ * Version:           2.1.0
  * Text Domain:       nginx-helper
  * Domain Path:       /languages
  * Requires at least: 3.0
- * Tested up to: 5.1
+ * Tested up to: 5.2.2
  *
  * @since             2.0.0
  * @package           nginx-helper
