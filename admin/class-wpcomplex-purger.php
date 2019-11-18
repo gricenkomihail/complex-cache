@@ -1,7 +1,7 @@
 <?php
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fastcgi-purger.php';
 
-class Complex_Purger extends FastCGI_Purger {
+class WPComplex_Purger extends FastCGI_Purger {
 
 	private $purge_stack = array();
 
@@ -27,7 +27,7 @@ class Complex_Purger extends FastCGI_Purger {
 
 			if ( is_array( $blog_url ) && isset( $blog_url['host'] ) ) {
 
-				$rest_url = 'https://127.0.0.1:8083/rest/v1/svc0/00000000000000000000000000000000/' . $blog_url['host'] . '/0/cache/purge';
+				$rest_url = 'https://127.0.0.1:8085/rest/v1/svc0/00000000000000000000000000000000/' . $blog_url['host'] . '/0/cache/purge';
 
 				if ( $purge_all === true ) {
 					$request = json_encode( array( 'purge' => 'all' ) );

@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../admin/class-nginx-helper-admin.php:171, ../admin/class-nginx-helper-admin.php:172, ../admin/class-nginx-helper-admin.php:182, ../admin/class-nginx-helper-admin.php:183
 msgid "Nginx Helper"
-msgstr "Caching System"
+msgstr "Cache Settings"
 
 #: ../admin/class-nginx-helper-admin.php:216, ../admin/class-nginx-helper-admin.php:218
 msgid "Purge Cache"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: ../admin/partials/nginx-helper-admin-display.php:21
 msgid "Nginx Settings"
-msgstr "WPComples Caching Settings"
+msgstr "WPComplex Cache Settings"
 
 #: ../admin/partials/nginx-helper-general-options.php:56
 msgid "Log file size must be a number."
@@ -586,12 +586,12 @@ msgid "Premium Support Forum"
 msgstr ""
 
 #: ../includes/class-nginx-helper-activator.php:49
-msgid "Sorry, you need to be an administrator to use Nginx Helper"
+msgid "Sorry, you need to be an administrator to use WPComplex Cache Helper"
 msgstr ""
 
 #. translators: %s is Minimum WP version.
 #: ../includes/class-nginx-helper.php:309
-msgid "Sorry, Nginx Helper requires WordPress %s or higher"
+msgid "Sorry, WPComplex Cache Helper requires WordPress %s or higher"
 msgstr ""
 
 #: ../wp-cli.php:40
