@@ -33,6 +33,7 @@ class WPComplex_Cache_Helper {
         add_filter( 'nginx_asset_path', array( $this, 'override_nginx_asset_path' ), 999, 1 );
         add_filter( 'nginx_asset_url', array( $this, 'override_nginx_asset_url' ), 999, 1 );
         add_filter( 'load_textdomain_mofile', array( $this, 'override_language_file' ), 10, 2 );
+        add_filter( 'site_status_tests', array( $this, 'remove_unwanted_tests' ), 10, 1 );
     }
 
     public function override_nginx_asset_path( $log_path ) {
@@ -55,6 +56,7 @@ class WPComplex_Cache_Helper {
 
 		    $mofile = WP_PLUGIN_DIR . '/' . $this->plugin_slug . '/languages/' . $this->plugin_slug . '-' . get_locale() . '.mo';
 	    }
+
 	    return $mofile;
 	}
 
@@ -128,6 +130,17 @@ class WPComplex_Cache_Helper {
         }
 
         return $transient;
+    }
+
+    public function remove_unwanted_tests($tests) {
+
+    	if (defined('WP_AUTO_UPDATE_CORE') && WP_AUTO_UPDATE_CORE === false)
+    		unset($tests['async']['background_updates']);
+
+    	if (defined('DISABLE_WP_CRON') && DISABLE_WP_CRON === true)
+    		unset($tests['direct']['scheduled_events']);
+
+    	return $tests;
     }
 
     private function check_plugin_updates() {

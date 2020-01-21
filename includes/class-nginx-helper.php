@@ -133,7 +133,7 @@ class Nginx_Helper {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-nginx-helper-admin.php';
 
 		/**
-		 * The class for helping updates from own server
+		 * The class for wpcomplex stuff functions
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcomplex-cache-helper.php'; // ADDED
 
@@ -142,7 +142,6 @@ class Nginx_Helper {
 		 * side of the site.
 		 */
 		$this->loader = new Nginx_Helper_Loader();
-
 	}
 
 	/**
