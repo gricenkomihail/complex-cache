@@ -2,11 +2,11 @@
 /**
  * Plugin Name:       WPComplex Cache Helper
  * Description:       WPComplex Cache Helper solution, fork from Nginx Helper plugin by rtCamp
- * Version:           2.1.0
+ * Version:           2.2.1
  * Text Domain:       nginx-helper
  * Domain Path:       /languages
  * Requires at least: 3.0
- * Tested up to: 5.2.2
+ * Tested up to: 5.3.2
  *
  * @since             2.0.0
  * @package           nginx-helper
@@ -84,11 +84,10 @@ function run_nginx_helper() {
 	// Load WP-CLI command.
 	if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
-		require_once NGINX_HELPER_BASEPATH . 'wp-cli.php';
+		require_once NGINX_HELPER_BASEPATH . 'class-nginx-helper-wp-cli-command.php';
 		\WP_CLI::add_command( 'nginx-helper', 'Nginx_Helper_WP_CLI_Command' );
 
 	}
 
 }
-
 run_nginx_helper();
