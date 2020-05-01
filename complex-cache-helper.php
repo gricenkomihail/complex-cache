@@ -6,7 +6,7 @@
  * Text Domain:       nginx-helper
  * Domain Path:       /languages
  * Requires at least: 3.0
- * Tested up to: 5.3.2
+ * Tested up to: 5.4
  *
  * @since             2.0.0
  * @package           nginx-helper
