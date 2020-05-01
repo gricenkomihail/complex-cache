@@ -195,7 +195,7 @@ msgstr ""
 
 #: ../admin/partials/nginx-helper-admin-display.php:21
 msgid "Nginx Settings"
-msgstr "WPComplex Cache Settings"
+msgstr "Complex Cache Settings"
 
 #: ../admin/partials/nginx-helper-general-options.php:56
 msgid "Log file size must be a number."
@@ -586,12 +586,12 @@ msgid "Premium Support Forum"
 msgstr ""
 
 #: ../includes/class-nginx-helper-activator.php:49
-msgid "Sorry, you need to be an administrator to use WPComplex Cache Helper"
+msgid "Sorry, you need to be an administrator to use Complex Cache Helper"
 msgstr ""
 
 #. translators: %s is Minimum WP version.
 #: ../includes/class-nginx-helper.php:309
-msgid "Sorry, WPComplex Cache Helper requires WordPress %s or higher"
+msgid "Sorry, Complex Cache Helper requires WordPress %s or higher"
 msgstr ""
 
 #: ../wp-cli.php:40

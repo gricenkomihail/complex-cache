@@ -133,9 +133,9 @@ class Nginx_Helper {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-nginx-helper-admin.php';
 
 		/**
-		 * The class for wpcomplex stuff functions
+		 * The class for our custom stuff functions
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcomplex-cache-helper.php'; // ADDED
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-complex-cache-helper.php'; // ADDED
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -172,7 +172,7 @@ class Nginx_Helper {
 
 		global $nginx_helper_admin, $nginx_purger, $complex_purger_helper; // ADDED
 
-		$complex_purger_helper = new WPComplex_Cache_Helper( $this->get_plugin_name(), $this->get_version() ); // ADDED
+		$complex_purger_helper = new Complex_Cache_Helper( $this->get_plugin_name(), $this->get_version() ); // ADDED
 
 		$nginx_helper_admin = new Nginx_Helper_Admin( $this->get_plugin_name(), $this->get_version() );
 
@@ -195,8 +195,8 @@ class Nginx_Helper {
 			//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fastcgi-purger.php';
 			//$nginx_purger = new FastCGI_Purger();
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpcomplex-purger.php';
-			$nginx_purger = new WPComplex_Purger();
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-complex-purger.php';
+			$nginx_purger = new Complex_Purger();
 
 		}
 
