@@ -154,8 +154,11 @@ class Complex_Cache_Helper {
 
         if( false == ( $remote = get_transient( $transient ) ) ) {
 
-            $remote = wp_remote_get( $this->get_server_uri($action), array('timeout' => 10,
-                                                                                    'headers' => array( 'Accept' => 'application/json')) );
+	        $remote = wp_remote_get( $this->get_server_uri( $action ), array(
+		        'timeout'   => 10,
+		        'headers'   => array( 'Accept' => 'application/json' ),
+		        'sslverify' => false,
+	        ) );
 
             if ( !is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && !empty( $remote['body'] ) ) {
 
