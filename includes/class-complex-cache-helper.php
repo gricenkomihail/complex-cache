@@ -1,11 +1,11 @@
 <?php
 
-define( 'WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE', 'wpcomplex-cache-helper/wpcomplex-cache-helper.php' );
-define( 'WPCOMPLEX_CACHE_HELPER_PLUGIN_SLUG', 'wpcomplex-cache-helper' );
+define( 'COMPLEX_CACHE_HELPER_PLUGIN_FILE', 'complex-cache-helper/complex-cache-helper.php' );
+define( 'COMPLEX_CACHE_HELPER_PLUGIN_SLUG', 'complex-cache-helper' );
 
-define( 'WPCOMPLEX_UPDATES_SERVER', 'files.wpcomplex.com' );
+define( 'COMPLEX_UPDATES_SERVER', 'files.wpcomplex.com' );
 
-class WPComplex_Cache_Helper {
+class Complex_Cache_Helper {
 
     private $unwanted_plugins = array('wp-fastest-cache/wpFastestCache.php',
                                         'w3-total-cache/w3-total-cache.php');
@@ -19,10 +19,10 @@ class WPComplex_Cache_Helper {
 
     public function __construct($plugin_name, $original_version) {
 
-    	$this->plugin_headers = $this->parse_plugin_headers( dirname( dirname( dirname( __FILE__ ) ) ) . '/' . WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE );
+    	$this->plugin_headers = $this->parse_plugin_headers( dirname( dirname( dirname( __FILE__ ) ) ) . '/' . COMPLEX_CACHE_HELPER_PLUGIN_FILE );
 
-        $this->plugin_file = WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE;
-        $this->plugin_slug = WPCOMPLEX_CACHE_HELPER_PLUGIN_SLUG;
+        $this->plugin_file = COMPLEX_CACHE_HELPER_PLUGIN_FILE;
+        $this->plugin_slug = COMPLEX_CACHE_HELPER_PLUGIN_SLUG;
 
         $this->plugin_ver = $this->plugin_headers['Version'];
 
@@ -105,7 +105,7 @@ class WPComplex_Cache_Helper {
 
             $update_info = $this->check_plugin_updates();
 
-            if (is_object($update_info) && isset($update_info->slug) && $update_info->slug === WPCOMPLEX_CACHE_HELPER_PLUGIN_SLUG) {
+            if (is_object($update_info) && isset($update_info->slug) && $update_info->slug === COMPLEX_CACHE_HELPER_PLUGIN_SLUG) {
 
 	            $plugin_info = new stdClass();
 
@@ -118,13 +118,13 @@ class WPComplex_Cache_Helper {
 	            $transient->response[$plugin_info->plugin] = $plugin_info;
             }
 
-            if (isset($transient->response[WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE])) {
+            if (isset($transient->response[COMPLEX_CACHE_HELPER_PLUGIN_FILE])) {
 
-            	if ($transient->response[WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE]->new_version == $this->plugin_ver) {
+            	if ($transient->response[COMPLEX_CACHE_HELPER_PLUGIN_FILE]->new_version == $this->plugin_ver) {
 
-            		$transient->no_update[WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE] = $transient->response[WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE];
+            		$transient->no_update[COMPLEX_CACHE_HELPER_PLUGIN_FILE] = $transient->response[COMPLEX_CACHE_HELPER_PLUGIN_FILE];
 
-		            unset($transient->response[WPCOMPLEX_CACHE_HELPER_PLUGIN_FILE]);
+		            unset($transient->response[COMPLEX_CACHE_HELPER_PLUGIN_FILE]);
 	            }
             }
         }
@@ -173,7 +173,7 @@ class WPComplex_Cache_Helper {
 
     private function get_server_uri($action)
     {
-        $uri = 'https://' . WPCOMPLEX_UPDATES_SERVER . '/v1/';
+        $uri = 'https://' . COMPLEX_UPDATES_SERVER . '/v1/';
 
         switch ($action)
         {
@@ -203,8 +203,8 @@ class WPComplex_Cache_Helper {
         $class = 'notice notice-warning';
         $plugin = $plugin['Name'];
 
-        $plugin_message = sprintf(__('Plugin: <b>%s</b> is incompatible with WPComplex. Please deactivate it to prevent system errors', $this->textdomain), $plugin);
-        $title_message = __('WPComplex Cache', $this->textdomain);
+        $plugin_message = sprintf(__('Unfortunately plugin <b>%s</b> may cause issues with caching. Please, deactivate it to prevent such errors.', $this->textdomain), $plugin);
+        $title_message = __('Complex Cache', $this->textdomain);
 
         $message = sprintf('<b>%s</b></br>&nbsp&nbsp&nbsp%s', $title_message, $plugin_message);
 

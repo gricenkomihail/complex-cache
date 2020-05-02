@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       WPComplex Cache Helper
- * Description:       WPComplex Cache Helper solution, fork from Nginx Helper plugin by rtCamp
+ * Plugin Name:       Complex Cache Helper
+ * Description:       Complex Cache Helper solution, fork from Nginx Helper plugin by rtCamp
  * Version:           2.2.1
  * Text Domain:       nginx-helper
  * Domain Path:       /languages

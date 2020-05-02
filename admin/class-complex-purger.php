@@ -1,7 +1,7 @@
 <?php
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fastcgi-purger.php';
 
-class WPComplex_Purger extends FastCGI_Purger {
+class Complex_Purger extends FastCGI_Purger {
 
 	private $purge_stack = array();
 
