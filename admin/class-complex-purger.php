@@ -25,9 +25,9 @@ class Complex_Purger extends FastCGI_Purger {
 			$this->purge_stack = array_unique( $this->purge_stack );
 			$blog_url          = parse_url( get_site_url( 1 ) );
 
-			if ( is_array( $blog_url ) && isset( $blog_url['host'] ) ) {
+			if ( is_array( $blog_url ) && isset( $blog_url['host'] ) && defined( 'HOSTING_SERVICE_ID' ) ) {
 
-				$rest_url = 'https://127.0.0.1:8085/rest/v1/svc0/00000000000000000000000000000000/' . $blog_url['host'] . '/0/cache/purge';
+				$rest_url = 'https://127.0.0.1:8085/rest/v1/' . HOSTING_SERVICE_ID . '/cache/purge';
 
 				if ( $purge_all === true ) {
 					$request = json_encode( array( 'purge' => 'all' ) );
